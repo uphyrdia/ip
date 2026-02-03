@@ -2,75 +2,81 @@ import java.util.Scanner;
 
 public class Phrolova {
 
+    public static final int MAX_NUM_OF_TASKS = 100;
+
     public static void main(String[] args) {
-        System.out.println("\tI'm Phrolova.\n\tWhat are you planning to do?");
-        Task[] tasks = new Task[100];
+        UI ui = new UI();
         Scanner in = new Scanner(System.in);
-        String message;
+        Task[] tasks = new Task[MAX_NUM_OF_TASKS];
         int taskCount = 0;
+
+        ui.print("I'm Phrolova.");
+        ui.print("What are you planning to do?");
+
+        String message;
+
         while (true) {
             message = in.nextLine();
             if (message.equals("bye")) {
-                System.out.println("\tBye.");
+                ui.print("Bye.");
                 return;
             }
             if (message.equals("list")) {
-                for (int j = 0; j < taskCount; j++) {
-                    System.out.println("\t" + (j+1) + "." + tasks[j].toString());
+                for (int i = 0; i < taskCount; i++) {
+                    ui.print((i+1) + "." + tasks[i].toString());
                 }
                 continue;
             }
             if (message.startsWith("mark")) {
-                int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-                if (n >= taskCount) {
-                    System.out.println("\tThere are only " + taskCount + " tasks in the list.");
-                    continue;
+                try {
+                    int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
+                    tasks[n].mark();
+                    ui.print("Marked as done: " + tasks[n].toString());
+                } catch (Exception e) {
+                    ui.print("Invalid command.");
                 }
-                tasks[n].mark();
-                System.out.println("\tMarked as done: " + tasks[n].toString());
                 continue;
             }
             if (message.startsWith("unmark")) {
-                int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-                if (n >= taskCount) {
-                    System.out.println("\tThere are only " + taskCount + " tasks in the list.");
-                    continue;
+                try {
+                    int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
+                    tasks[n].unmark();
+                    ui.print("Unmarked: " + tasks[n].toString());
+                } catch (Exception e) {
+                    ui.print("Invalid command.");
                 }
-                tasks[n].unmark();
-                System.out.println("\tUnmarked: " + tasks[n].toString());
                 continue;
-            }
-            if (taskCount == 100) {
-                System.out.println("\tHow can you have so many things to do? Go relax.");
-                return;
             }
             if (message.startsWith("todo")) {
                 tasks[taskCount] = new Todo(message.substring(5));
-            } else if (message.startsWith("deadline")) {
-                int i = message.indexOf("/by");
-                if (i == -1) {
-                    System.out.println("\t/by when?");
-                    continue;
-                }
-                tasks[taskCount] = new Deadline(message.substring(9, i-1), message.substring(i+4));
-            } else if (message.startsWith("event")) {
-                int i = message.indexOf("/from");
-                if (i == -1) {
-                    System.out.println("\t/from when?");
-                    continue;
-                }
-                int j = message.indexOf("/to");
-                if (j == -1) {
-                    System.out.println("\t/to when?");
-                    continue;
-                }
-                tasks[taskCount] = new Event(message.substring(6, i-1), message.substring(i+6, j-1), message.substring(j+4));
-            } else {
-                System.out.println("\tInvalid command.");
+                ui.print("added: " + tasks[taskCount].toString());
+                taskCount++;
                 continue;
             }
-            System.out.println("\tadded: " + tasks[taskCount].toString());
-            taskCount++;
+            if (message.startsWith("deadline")) {
+                int i = message.indexOf("/by");
+                try {
+                    tasks[taskCount] = new Deadline(message.substring(9, i - 1), message.substring(i + 4));
+                } catch (Exception e) {
+                    ui.print("Invalid command.");
+                }
+                ui.print("added: " + tasks[taskCount].toString());
+                taskCount++;
+                continue;
+            }
+            if (message.startsWith("event")) {
+                int i = message.indexOf("/from");
+                int j = message.indexOf("/to");
+                try {
+                    tasks[taskCount] = new Event(message.substring(6, i - 1), message.substring(i + 6, j - 1), message.substring(j + 4));
+                } catch (Exception e) {
+                    ui.print("Invalid command.");
+                }
+                ui.print("added: " + tasks[taskCount].toString());
+                taskCount++;
+                continue;
+            }
+            ui.print("Invalid command.");
         }
     }
 
