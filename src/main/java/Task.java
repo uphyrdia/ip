@@ -2,6 +2,7 @@ public class Task {
 
     protected String description;
     protected boolean done;
+    UI ui = new UI();
 
     public Task(String description) {
         this.description = description;
@@ -10,10 +11,12 @@ public class Task {
 
     public void mark() {
         this.done = true;
+        ui.print("Marked as done: " + this.toString());
     }
 
     public void unmark() {
         this.done = false;
+        ui.print("Unmarked: " + this.toString());
     }
 
     public String getStatusIcon() {
