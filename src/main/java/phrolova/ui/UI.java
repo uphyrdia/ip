@@ -1,3 +1,5 @@
+package phrolova.ui;
+
 public class UI {
 
     public void greet() {
