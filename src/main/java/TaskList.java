@@ -10,10 +10,9 @@ public class TaskList {
         ui.print("added: " + tasks.get(tasks.size()-1).toString());
     }
 
-
     public void list() {
         for (int i = 0; i < tasks.size(); i++) {
-            ui.print((i+1) + "." + tasks.get(i).toString());
+            ui.print((i + 1) + "." + tasks.get(i).toString());
         }
     }
 
@@ -35,7 +34,10 @@ public class TaskList {
         }
     }
 
-    public void addTodo(String message) {
+    public void addTodo(String message) throws MissingTaskException {
+        if (message.length() < 5) {
+            throw new MissingTaskException();
+        }
         add(new Todo(message.substring(5)));
     }
 
