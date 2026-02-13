@@ -46,8 +46,8 @@ public class Phrolova {
                 throw new InvalidCommandException();
             } catch (InvalidCommandException e) {
                 ui.print("Invalid command.");
-            } catch (IncompleteCommandException e) {
-                ui.print("Incomplete command.");
+            } catch (MissingTaskException e) {
+                ui.print("Missing task.");
             }
         }
 

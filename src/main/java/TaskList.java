@@ -34,9 +34,9 @@ public class TaskList {
         }
     }
 
-    public void addTodo(String message) throws IncompleteCommandException {
+    public void addTodo(String message) throws MissingTaskException {
         if (message.length() < 5) {
-            throw new IncompleteCommandException();
+            throw new MissingTaskException();
         }
         add(new Todo(message.substring(5)));
     }
