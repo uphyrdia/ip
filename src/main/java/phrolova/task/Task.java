@@ -1,4 +1,4 @@
-package phrolova;
+package phrolova.task;
 
 import phrolova.ui.UI;
 

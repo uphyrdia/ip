@@ -1,4 +1,4 @@
-package phrolova;
+package phrolova.task;
 
 public class Deadline extends Task {
 
