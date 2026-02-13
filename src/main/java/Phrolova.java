@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 public class Phrolova {
 
-    public static final int MAX_NUM_OF_TASKS = 100;
-
     public static void main(String[] args) {
 
         UI ui = new UI();
@@ -11,39 +9,46 @@ public class Phrolova {
         TaskList tasks = new TaskList();
 
         ui.greet();
+
         String message;
 
         while (true) {
             message = in.nextLine();
-            if (message.equals("bye")) {
-                ui.print("Bye.");
-                return;
+            try {
+                if (message.equals("bye")) {
+                    ui.bye();
+                    return;
+                }
+                if (message.equals("list")) {
+                    tasks.list();
+                    continue;
+                }
+                if (message.startsWith("mark")) {
+                    tasks.mark(message);
+                    continue;
+                }
+                if (message.startsWith("unmark")) {
+                    tasks.unmark(message);
+                    continue;
+                }
+                if (message.startsWith("todo")) {
+                    tasks.addTodo(message);
+                    continue;
+                }
+                if (message.startsWith("deadline")) {
+                    tasks.addDeadline(message);
+                    continue;
+                }
+                if (message.startsWith("event")) {
+                    tasks.addEvent(message);
+                    continue;
+                }
+                throw new InvalidCommandException();
+            } catch (InvalidCommandException e) {
+                ui.print("Invalid command.");
+            } catch (IncompleteCommandException e) {
+                ui.print("Incomplete command.");
             }
-            if (message.equals("list")) {
-                tasks.list();
-                continue;
-            }
-            if (message.startsWith("mark")) {
-                tasks.mark(message);
-                continue;
-            }
-            if (message.startsWith("unmark")) {
-                tasks.unmark(message);
-                continue;
-            }
-            if (message.startsWith("todo")) {
-                tasks.addTodo(message);
-                continue;
-            }
-            if (message.startsWith("deadline")) {
-                tasks.addDeadline(message);
-                continue;
-            }
-            if (message.startsWith("event")) {
-                tasks.addEvent(message);
-                continue;
-            }
-            ui.print("Invalid command.");
         }
 
     }

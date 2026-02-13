@@ -5,6 +5,10 @@ public class UI {
         print("What are you planning to do?");
     }
 
+    public void bye() {
+        print("Bye.");
+    }
+
     public void print(String s) {
         System.out.println("\t" + s);
     }
