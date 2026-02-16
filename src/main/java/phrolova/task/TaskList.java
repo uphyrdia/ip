@@ -30,6 +30,17 @@ public class TaskList {
         }
     }
 
+    public void delete(String message) {
+        try {
+            int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
+            ui.print("Removed: " + tasks.get(n).toString());
+            tasks.remove(n);
+            ui.print("You have " + tasks.size() + " remaining task(s).");
+        } catch (Exception e) {
+            ui.print("Invalid command.");
+        }
+    }
+
     public void unmark(String message) {
         try {
             int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
