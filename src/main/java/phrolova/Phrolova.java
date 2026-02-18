@@ -36,6 +36,10 @@ public class Phrolova {
                     tasks.unmark(message);
                     continue;
                 }
+                if (message.startsWith("delete")) {
+                    tasks.delete(message);
+                    continue;
+                }
                 if (message.startsWith("todo")) {
                     tasks.addTodo(message);
                     continue;
