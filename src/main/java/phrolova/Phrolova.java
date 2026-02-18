@@ -1,5 +1,6 @@
 package phrolova;
 
+import java.io.IOException;
 import java.util.Scanner;
 import phrolova.exception.*;
 import phrolova.task.TaskList;
@@ -7,13 +8,14 @@ import phrolova.ui.UI;
 
 public class Phrolova {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         UI ui = new UI();
         Scanner in = new Scanner(System.in);
         TaskList tasks = new TaskList();
 
         ui.greet();
+        tasks.load();
 
         String message;
 
@@ -53,6 +55,8 @@ public class Phrolova {
                 ui.print("Invalid command.");
             } catch (MissingTaskException e) {
                 ui.print("Missing task.");
+            } catch (IOException e) {
+                ui.print("I/O Error.");
             }
         }
 

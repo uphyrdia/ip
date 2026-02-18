@@ -18,6 +18,10 @@ public class Task {
         ui.print("Marked as done: " + this.toString());
     }
 
+    public void markWithoutMessage() {
+        this.done = true;
+    }
+
     public void unmark() {
         this.done = false;
         ui.print("Unmarked: " + this.toString());
@@ -30,6 +34,10 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
+    }
+
+    public String toText() {
+        return "|" + (done ? 1 : 0) + "|" + this.description;
     }
 
 }
