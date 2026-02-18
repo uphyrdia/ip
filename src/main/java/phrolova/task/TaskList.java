@@ -71,9 +71,7 @@ public class TaskList {
         }
     }
 
-<<<<<<< Updated upstream
-    public void mark(String message) {
-=======
+
     public void delete(String message) throws IOException {
         try {
             int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
@@ -87,34 +85,16 @@ public class TaskList {
     }
 
     public void mark(String message) throws IOException {
->>>>>>> Stashed changes
         try {
             int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
             tasks.get(n).mark();
         } catch (Exception e) {
             ui.print("Invalid command.");
         }
-<<<<<<< Updated upstream
-    }
-
-    public void delete(String message) {
-        try {
-            int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-            ui.print("Removed: " + tasks.get(n).toString());
-            tasks.remove(n);
-            ui.print("You have " + tasks.size() + " remaining task(s).");
-        } catch (Exception e) {
-            ui.print("Invalid command.");
-        }
-    }
-
-    public void unmark(String message) {
-=======
         save();
     }
 
     public void unmark(String message) throws IOException {
->>>>>>> Stashed changes
         try {
             int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
             tasks.get(n).unmark();
