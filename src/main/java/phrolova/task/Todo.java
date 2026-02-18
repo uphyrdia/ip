@@ -11,4 +11,8 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    @Override
+    public String toText() {
+        return "T" + super.toText();
+    }
 }
