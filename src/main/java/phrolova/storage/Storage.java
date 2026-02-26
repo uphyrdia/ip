@@ -1,9 +1,6 @@
 package phrolova.storage;
 
-import phrolova.task.Deadline;
-import phrolova.task.Event;
-import phrolova.task.Task;
-import phrolova.task.Todo;
+import phrolova.task.*;
 
 import java.io.IOException;
 import java.nio.file.Files;

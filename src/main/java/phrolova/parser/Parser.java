@@ -3,6 +3,7 @@ package phrolova.parser;
 import phrolova.exception.*;
 import phrolova.ui.UI;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -10,7 +11,7 @@ import static phrolova.parser.Command.*;
 
 public class Parser {
 
-    private UI ui = new UI();
+    private final UI ui = new UI();
     public int indexToMarkUnmarkDelete = 1;
     public String description = "";
     public String by = "";
@@ -100,14 +101,11 @@ public class Parser {
             if (i > j) {
                 throw new FromToOrderException();
             }
-            this.description = IntStream.range(1, i)
-                    .mapToObj(k -> words[k])
+            this.description = Arrays.stream(words, 1, i)
                     .collect(Collectors.joining(" "));
-            this.from = IntStream.range(i + 1, j)
-                    .mapToObj(k -> words[k])
+            this.from = Arrays.stream(words, i + 1, j)
                     .collect(Collectors.joining(" "));
-            this.to = IntStream.range(j + 1, words.length)
-                    .mapToObj(k -> words[k])
+            this.to = Arrays.stream(words, j + 1, words.length)
                     .collect(Collectors.joining(" "));
             return EVENT;
         }

@@ -1,7 +1,6 @@
 package phrolova;
 
 import java.io.IOException;
-import java.util.Scanner;
 import phrolova.exception.*;
 import phrolova.parser.Command;
 import phrolova.parser.Parser;
@@ -11,21 +10,25 @@ import phrolova.ui.UI;
 import static phrolova.parser.Command.*;
 
 public class Phrolova {
+    private final UI ui;
+    private final TaskList tasks;
+    private final Parser parser = new Parser();
+
+    public Phrolova() {
+        ui = new UI();
+        tasks = new TaskList();
+    }
 
     public static void main(String[] args) throws IOException {
+        new Phrolova().run();
+    }
 
-        UI ui = new UI();
-        Scanner in = new Scanner(System.in);
-        TaskList tasks = new TaskList();
-        Parser parser = new Parser();
-
+    public void run () throws IOException {
         ui.greet();
         tasks.load();
-
         String message;
-
         while (true) {
-            message = in.nextLine();
+            message = ui.read();
             try {
                 Command command = parser.parse(message);
                 if (command == BYE) {
@@ -75,7 +78,6 @@ public class Phrolova {
                 ui.print("Pls respect the order of from to.");
             }
         }
-
     }
 
 }

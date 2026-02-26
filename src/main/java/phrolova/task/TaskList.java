@@ -68,8 +68,6 @@ public class TaskList {
     }
 
     public void addEvent(String description, String fromDate, String toDate) throws IOException {
-//        int i = message.indexOf("/from");
-//        int j = message.indexOf("/to");
         add(new Event(description, fromDate, toDate));
         storage.save();
     }

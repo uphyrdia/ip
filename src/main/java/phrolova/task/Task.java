@@ -6,7 +6,7 @@ public class Task {
 
     protected String description;
     protected boolean done;
-    UI ui = new UI();
+    private final UI ui = new UI();
 
     public Task(String description) {
         this.description = description;
