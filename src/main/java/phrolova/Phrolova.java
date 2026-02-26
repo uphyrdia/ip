@@ -1,6 +1,9 @@
 package phrolova;
 
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import phrolova.exception.*;
 import phrolova.parser.Command;
 import phrolova.parser.Parser;
@@ -11,15 +14,16 @@ public class Phrolova {
 
     private final UI ui;
     private final TaskList tasks;
-    private final Parser parser = new Parser();
+    private final Parser parser;
 
-    public Phrolova() {
+    public Phrolova(Path savePath) {
         ui = new UI();
-        tasks = new TaskList();
+        tasks = new TaskList(savePath);
+        parser = new Parser();
     }
 
     public static void main(String[] args) throws IOException {
-        new Phrolova().run();
+        new Phrolova(Paths.get("data","Phrolova.txt")).run();
     }
 
     public void run () throws IOException {

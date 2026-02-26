@@ -5,17 +5,17 @@ import phrolova.task.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
 
-    private final Path savePath = Paths.get("data","Phrolova.txt");
+    private final Path savePath;
     private final ArrayList<Task> tasks;
 
-    public Storage(ArrayList<Task> tasks) {
+    public Storage(ArrayList<Task> tasks, Path savePath) {
         this.tasks = tasks;
+        this.savePath = savePath;
     }
 
     public void save() throws IOException {
@@ -50,7 +50,7 @@ public class Storage {
 
     public void load() throws IOException {
         if (!Files.exists(savePath)) {
-            return;
+            throw new IOException();
         }
         List<String> lines = Files.readAllLines(savePath);
         for (String line : lines) {

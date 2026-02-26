@@ -1,6 +1,7 @@
 package phrolova.task;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 import phrolova.exception.*;
@@ -10,11 +11,23 @@ import phrolova.ui.UI;
 public class TaskList {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
-    private final Storage storage = new Storage(tasks);
+    private final Storage storage;
     private final UI ui = new UI();
 
-    public void load() throws IOException {
-        storage.load();
+    public TaskList(Path savePath) {
+        storage = new Storage(tasks, savePath);
+    }
+
+    public void load() {
+        try {
+            storage.load();
+        } catch (IOException e) {
+            ui.print("Data file does not exist, creating one.");
+        }
+    }
+
+    public void save() throws IOException {
+        storage.save();
     }
 
     public void add(Task task) {
@@ -36,7 +49,7 @@ public class TaskList {
             ui.print("Index out of bounds.");
         }
         ui.print("You have " + tasks.size() + " remaining task(s).");
-        storage.save();
+        save();
     }
 
     public void mark(int i) throws IOException {
@@ -45,7 +58,7 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             ui.print("Index out of bounds.");
         }
-        storage.save();
+        save();
     }
 
     public void unmark(int i) throws IOException {
@@ -54,22 +67,22 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             ui.print("Index out of bounds.");
         }
-        storage.save();
+        save();
     }
 
     public void addTodo(String description) throws IOException {
         add(new Todo(description));
-        storage.save();
+        save();
     }
 
     public void addDeadline(String description, String dueDate) throws IOException {
         add(new Deadline(description, dueDate));
-        storage.save();
+        save();
     }
 
     public void addEvent(String description, String fromDate, String toDate) throws IOException {
         add(new Event(description, fromDate, toDate));
-        storage.save();
+        save();
     }
 
 }

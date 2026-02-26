@@ -1,8 +1,0 @@
-E|0|a|b|c
-D|1|ddl|ddl
-T|0|c
-T|0|d
-D|0|x|8pm
-E|0|e e e|1am 2am 3am|4pm 5pm 6pm
-E|0|e f g|x y z|a b c
-D|0|ddl|ddl
