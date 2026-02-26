@@ -3,6 +3,7 @@ package phrolova;
 import java.io.IOException;
 import java.util.Scanner;
 import phrolova.exception.*;
+import phrolova.parser.Parser;
 import phrolova.task.TaskList;
 import phrolova.ui.UI;
 
@@ -13,6 +14,7 @@ public class Phrolova {
         UI ui = new UI();
         Scanner in = new Scanner(System.in);
         TaskList tasks = new TaskList();
+        Parser parser = new Parser();
 
         ui.greet();
         tasks.load();

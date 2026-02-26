@@ -28,7 +28,6 @@ public class TaskList {
         }
     }
 
-
     public void delete(String message) throws IOException {
         try {
             int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
