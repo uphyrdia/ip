@@ -19,7 +19,7 @@ public class TaskList {
 
     public void add(Task task) {
         tasks.add(task);
-        ui.print("added: " + tasks.get(tasks.size()-1).toString());
+        ui.print("added: " + tasks.get(tasks.size() - 1).toString());
     }
 
     public void list() {
@@ -28,64 +28,49 @@ public class TaskList {
         }
     }
 
-    public void delete(String message) throws IOException {
+    public void delete(int i) throws IOException {
         try {
-            int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-            ui.print("Removed: " + tasks.get(n).toString());
-            tasks.remove(n);
-            ui.print("You have " + tasks.size() + " remaining task(s).");
-        } catch (Exception e) {
-            ui.print("Invalid command.");
+            ui.print("Removed: " + tasks.get(i - 1).toString());
+            tasks.remove(i - 1);
+        } catch (IndexOutOfBoundsException e) {
+            ui.print("Index out of bounds.");
+        }
+        ui.print("You have " + tasks.size() + " remaining task(s).");
+        storage.save();
+    }
+
+    public void mark(int i) throws IOException {
+        try {
+            tasks.get(i - 1).mark();
+        } catch (IndexOutOfBoundsException e) {
+            ui.print("Index out of bounds.");
         }
         storage.save();
     }
 
-    public void mark(String message) throws IOException {
+    public void unmark(int i) throws IOException {
         try {
-            int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-            tasks.get(n).mark();
-        } catch (Exception e) {
-            ui.print("Invalid command.");
+            tasks.get(i - 1).unmark();
+        } catch (IndexOutOfBoundsException e) {
+            ui.print("Index out of bounds.");
         }
         storage.save();
     }
 
-    public void unmark(String message) throws IOException {
-        try {
-            int n = Integer.parseInt(message.replaceAll("\\D+", "")) - 1;
-            tasks.get(n).unmark();
-        } catch (Exception e) {
-            ui.print("Invalid command.");
-        }
+    public void addTodo(String description) throws IOException {
+        add(new Todo(description));
         storage.save();
     }
 
-    public void addTodo(String message) throws MissingTaskException, IOException {
-        if (message.length() < 5) {
-            throw new MissingTaskException();
-        }
-        add(new Todo(message.substring(5)));
+    public void addDeadline(String description, String dueDate) throws IOException {
+        add(new Deadline(description, dueDate));
         storage.save();
     }
 
-    public void addDeadline(String message) throws IOException {
-        int i = message.indexOf("/by");
-        try {
-            add(new Deadline(message.substring(9, i - 1), message.substring(i + 4)));
-        } catch (Exception e) {
-            ui.print("Invalid command.");
-        }
-        storage.save();
-    }
-
-    public void addEvent(String message) throws IOException {
-        int i = message.indexOf("/from");
-        int j = message.indexOf("/to");
-        try {
-            add(new Event(message.substring(6, i - 1), message.substring(i + 6, j - 1), message.substring(j + 4)));
-        } catch (Exception e) {
-            ui.print("Invalid command.");
-        }
+    public void addEvent(String description, String fromDate, String toDate) throws IOException {
+//        int i = message.indexOf("/from");
+//        int j = message.indexOf("/to");
+        add(new Event(description, fromDate, toDate));
         storage.save();
     }
 

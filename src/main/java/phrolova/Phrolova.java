@@ -3,9 +3,12 @@ package phrolova;
 import java.io.IOException;
 import java.util.Scanner;
 import phrolova.exception.*;
+import phrolova.parser.Command;
 import phrolova.parser.Parser;
 import phrolova.task.TaskList;
 import phrolova.ui.UI;
+
+import static phrolova.parser.Command.*;
 
 public class Phrolova {
 
@@ -24,45 +27,52 @@ public class Phrolova {
         while (true) {
             message = in.nextLine();
             try {
-                if (message.equals("bye")) {
+                Command command = parser.parse(message);
+                if (command == BYE) {
                     ui.bye();
                     return;
                 }
-                if (message.equals("list")) {
+                if (command == LIST) {
                     tasks.list();
                     continue;
                 }
-                if (message.startsWith("mark")) {
-                    tasks.mark(message);
+                if (command == MARK) {
+                    tasks.mark(parser.indexToMarkUnmarkDelete);
                     continue;
                 }
-                if (message.startsWith("unmark")) {
-                    tasks.unmark(message);
+                if (command == UNMARK) {
+                    tasks.unmark(parser.indexToMarkUnmarkDelete);
                     continue;
                 }
-                if (message.startsWith("delete")) {
-                    tasks.delete(message);
+                if (command == DELETE) {
+                    tasks.delete(parser.indexToMarkUnmarkDelete);
                     continue;
                 }
-                if (message.startsWith("todo")) {
-                    tasks.addTodo(message);
+                if (command == TODO) {
+                    tasks.addTodo(parser.description);
                     continue;
                 }
-                if (message.startsWith("deadline")) {
-                    tasks.addDeadline(message);
+                if (command == DEADLINE) {
+                    tasks.addDeadline(parser.description, parser.by);
                     continue;
                 }
-                if (message.startsWith("event")) {
-                    tasks.addEvent(message);
+                if (command == EVENT) {
+                    tasks.addEvent(parser.description, parser.from, parser.to);
                     continue;
                 }
-                throw new InvalidCommandException();
-            } catch (InvalidCommandException e) {
-                ui.print("Invalid command.");
+                if (command == INVALID) {
+                    ui.print("Invalid command.");
+                }
+            } catch (MissingIndexException e) {
+                ui.print("Pls enter the INDEX of the task. Find the index by list.");
             } catch (MissingTaskException e) {
-                ui.print("Missing task.");
-            } catch (IOException e) {
-                ui.print("I/O Error.");
+                ui.print("Pls specify the task description.");
+            } catch (MissingByException | MissingDeadlineException e) {
+                ui.print("Pls specify due date.");
+            } catch (MissingFromOrToException e) {
+                ui.print("Pls specify the from and to date of the event.");
+            } catch (FromToOrderException e) {
+                ui.print("Pls respect the order of from to.");
             }
         }
 

@@ -1,6 +1,6 @@
 package phrolova.parser;
 
-enum Command {
+public enum Command {
     BYE,
     LIST,
     MARK,
@@ -8,5 +8,6 @@ enum Command {
     TODO,
     DEADLINE,
     EVENT,
-    DELETE
+    DELETE,
+    INVALID
 }
