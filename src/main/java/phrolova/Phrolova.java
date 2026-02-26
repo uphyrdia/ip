@@ -1,69 +1,65 @@
 package phrolova;
 
 import java.io.IOException;
-import java.util.Scanner;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import phrolova.exception.*;
+import phrolova.parser.Command;
+import phrolova.parser.Parser;
 import phrolova.task.TaskList;
 import phrolova.ui.UI;
 
 public class Phrolova {
 
+    private final UI ui;
+    private final TaskList tasks;
+    private final Parser parser;
+
+    public Phrolova() {
+        ui = new UI();
+        tasks = new TaskList();
+        parser = new Parser();
+    }
+
     public static void main(String[] args) throws IOException {
+        new Phrolova().run();
+    }
 
-        UI ui = new UI();
-        Scanner in = new Scanner(System.in);
-        TaskList tasks = new TaskList();
-
+    public void run () throws IOException {
         ui.greet();
         tasks.load();
-
         String message;
-
         while (true) {
-            message = in.nextLine();
+            message = ui.read();
             try {
-                if (message.equals("bye")) {
-                    ui.bye();
-                    return;
+                Command cmd = parser.parse(message);
+                switch (cmd) {
+                    case BYE -> {
+                        ui.bye();
+                        return;
+                    }
+                    case LIST -> tasks.list();
+                    case MARK -> tasks.mark(parser.index);
+                    case UNMARK -> tasks.unmark(parser.index);
+                    case DELETE -> tasks.delete(parser.index);
+                    case TODO -> tasks.addTodo(parser.description);
+                    case DEADLINE -> tasks.addDeadline(parser.description, parser.by);
+                    case EVENT -> tasks.addEvent(parser.description, parser.from, parser.to);
+                    default -> ui.print("Invalid command.");
                 }
-                if (message.equals("list")) {
-                    tasks.list();
-                    continue;
-                }
-                if (message.startsWith("mark")) {
-                    tasks.mark(message);
-                    continue;
-                }
-                if (message.startsWith("unmark")) {
-                    tasks.unmark(message);
-                    continue;
-                }
-                if (message.startsWith("delete")) {
-                    tasks.delete(message);
-                    continue;
-                }
-                if (message.startsWith("todo")) {
-                    tasks.addTodo(message);
-                    continue;
-                }
-                if (message.startsWith("deadline")) {
-                    tasks.addDeadline(message);
-                    continue;
-                }
-                if (message.startsWith("event")) {
-                    tasks.addEvent(message);
-                    continue;
-                }
-                throw new InvalidCommandException();
-            } catch (InvalidCommandException e) {
-                ui.print("Invalid command.");
+            } catch (MissingIndexException e) {
+                ui.print("Pls enter the INDEX of the task. Find the index by list.");
             } catch (MissingTaskException e) {
-                ui.print("Missing task.");
-            } catch (IOException e) {
-                ui.print("I/O Error.");
+                ui.print("Pls specify the task description.");
+            } catch (MissingByException | MissingDeadlineException e) {
+                ui.print("Pls specify due date.");
+            } catch (MissingFromOrToException e) {
+                ui.print("Pls specify the from and to date of the event.");
+            } catch (FromToOrderException e) {
+                ui.print("Pls respect the order of from to.");
             }
         }
-
     }
 
 }
