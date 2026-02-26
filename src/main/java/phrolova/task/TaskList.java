@@ -11,12 +11,8 @@ import phrolova.ui.UI;
 public class TaskList {
 
     private final ArrayList<Task> tasks = new ArrayList<>();
-    private final Storage storage;
+    private final Storage storage = new Storage(tasks);
     private final UI ui = new UI();
-
-    public TaskList(Path savePath) {
-        storage = new Storage(tasks, savePath);
-    }
 
     public void load() {
         try {

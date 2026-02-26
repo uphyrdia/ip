@@ -16,14 +16,14 @@ public class Phrolova {
     private final TaskList tasks;
     private final Parser parser;
 
-    public Phrolova(Path savePath) {
+    public Phrolova() {
         ui = new UI();
-        tasks = new TaskList(savePath);
+        tasks = new TaskList();
         parser = new Parser();
     }
 
     public static void main(String[] args) throws IOException {
-        new Phrolova(Paths.get("data","Phrolova.txt")).run();
+        new Phrolova().run();
     }
 
     public void run () throws IOException {
