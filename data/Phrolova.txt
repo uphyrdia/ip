@@ -3,8 +3,6 @@ D|1|ddl|ddl
 T|0|c
 T|0|d
 D|0|x|8pm
-T|0|z
-D|0|  x|12am
 E|0|e e e|1am 2am 3am|4pm 5pm 6pm
 E|0|e f g|x y z|a b c
-T|0|td
+D|0|ddl|ddl

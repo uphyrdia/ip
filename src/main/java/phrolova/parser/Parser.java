@@ -12,7 +12,7 @@ import static phrolova.parser.Command.*;
 public class Parser {
 
     private final UI ui = new UI();
-    public int indexToMarkUnmarkDelete = 1;
+    public int index = 1;
     public String description = "";
     public String by = "";
     public String from = "";
@@ -39,7 +39,7 @@ public class Parser {
 
         if (words[0].equals("mark")) {
             try {
-                indexToMarkUnmarkDelete = Integer.parseInt(words[1]);
+                index = Integer.parseInt(words[1]);
                 return MARK;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new MissingIndexException();
@@ -48,7 +48,7 @@ public class Parser {
 
         if (words[0].equals("unmark")) {
             try {
-                indexToMarkUnmarkDelete = Integer.parseInt(words[1]);
+                index = Integer.parseInt(words[1]);
                 return UNMARK;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new MissingIndexException();
@@ -57,7 +57,7 @@ public class Parser {
 
         if (words[0].equals("delete")) {
             try {
-                indexToMarkUnmarkDelete = Integer.parseInt(words[1]);
+                index = Integer.parseInt(words[1]);
                 return DELETE;
             } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
                 throw new MissingIndexException();

@@ -7,9 +7,8 @@ import phrolova.parser.Parser;
 import phrolova.task.TaskList;
 import phrolova.ui.UI;
 
-import static phrolova.parser.Command.*;
-
 public class Phrolova {
+
     private final UI ui;
     private final TaskList tasks;
     private final Parser parser = new Parser();
@@ -30,41 +29,20 @@ public class Phrolova {
         while (true) {
             message = ui.read();
             try {
-                Command command = parser.parse(message);
-                if (command == BYE) {
-                    ui.bye();
-                    return;
-                }
-                if (command == LIST) {
-                    tasks.list();
-                    continue;
-                }
-                if (command == MARK) {
-                    tasks.mark(parser.indexToMarkUnmarkDelete);
-                    continue;
-                }
-                if (command == UNMARK) {
-                    tasks.unmark(parser.indexToMarkUnmarkDelete);
-                    continue;
-                }
-                if (command == DELETE) {
-                    tasks.delete(parser.indexToMarkUnmarkDelete);
-                    continue;
-                }
-                if (command == TODO) {
-                    tasks.addTodo(parser.description);
-                    continue;
-                }
-                if (command == DEADLINE) {
-                    tasks.addDeadline(parser.description, parser.by);
-                    continue;
-                }
-                if (command == EVENT) {
-                    tasks.addEvent(parser.description, parser.from, parser.to);
-                    continue;
-                }
-                if (command == INVALID) {
-                    ui.print("Invalid command.");
+                Command cmd = parser.parse(message);
+                switch (cmd) {
+                    case BYE -> {
+                        ui.bye();
+                        return;
+                    }
+                    case LIST -> tasks.list();
+                    case MARK -> tasks.mark(parser.index);
+                    case UNMARK -> tasks.unmark(parser.index);
+                    case DELETE -> tasks.delete(parser.index);
+                    case TODO -> tasks.addTodo(parser.description);
+                    case DEADLINE -> tasks.addDeadline(parser.description, parser.by);
+                    case EVENT -> tasks.addEvent(parser.description, parser.from, parser.to);
+                    default -> ui.print("Invalid command.");
                 }
             } catch (MissingIndexException e) {
                 ui.print("Pls enter the INDEX of the task. Find the index by list.");
