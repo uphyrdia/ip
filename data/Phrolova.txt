@@ -1,2 +1,5 @@
 T|0|1
 D|1|d|ddd d dd
+E|0|event|Friday 8 pm|Monday 1 am
+T|0|do past year paper cg2023
+D|0|do past year paper pc2130|tmr

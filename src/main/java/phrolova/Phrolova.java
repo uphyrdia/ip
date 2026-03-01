@@ -40,6 +40,7 @@ public class Phrolova {
                         return;
                     }
                     case LIST -> tasks.list();
+                    case FIND -> tasks.find(parser.description);
                     case MARK -> tasks.mark(parser.index);
                     case UNMARK -> tasks.unmark(parser.index);
                     case DELETE -> tasks.delete(parser.index);
