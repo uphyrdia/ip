@@ -37,6 +37,11 @@ public class Parser {
             return LIST;
         }
 
+        if (words[0].equals("find")) {
+            description = message.substring(5);
+            return FIND;
+        }
+
         if (words[0].equals("mark")) {
             try {
                 index = Integer.parseInt(words[1]);

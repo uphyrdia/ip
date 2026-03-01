@@ -48,6 +48,12 @@ public class TaskList {
         save();
     }
 
+    public void find(String keyword) {
+        tasks.stream()
+                .filter(t -> t.getDescription().contains(keyword))
+                .forEach(t -> ui.print(t.toString()));
+    }
+
     public void mark(int i) throws IOException {
         try {
             tasks.get(i - 1).mark();

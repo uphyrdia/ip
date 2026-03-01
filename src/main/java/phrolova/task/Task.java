@@ -27,6 +27,10 @@ public class Task {
         ui.print("Unmarked: " + this.toString());
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public String getStatusIcon() {
         return (done ? "X" : " ");
     }
