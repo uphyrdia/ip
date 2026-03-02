@@ -29,93 +29,88 @@ public class Parser {
 
         String[] words = message.split("\\s+");
 
-        if (words[0].equals("bye")) {
-            return BYE;
-        }
-
-        if (words[0].equals("list")) {
-            return LIST;
-        }
-
-        if (words[0].equals("find")) {
-            description = message.substring(5);
-            return FIND;
-        }
-
-        if (words[0].equals("mark")) {
-            try {
-                index = Integer.parseInt(words[1]);
-                return MARK;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new MissingIndexException();
+        switch (words[0]) {
+            case "bye" -> {
+                return BYE;
+            }
+            case "list" -> {
+                return LIST;
+            }
+            case "find" -> {
+                description = message.substring(5);
+                return FIND;
+            }
+            case "mark" -> {
+                try {
+                    index = Integer.parseInt(words[1]);
+                    return MARK;
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new MissingIndexException();
+                }
+            }
+            case "unmark" -> {
+                try {
+                    index = Integer.parseInt(words[1]);
+                    return UNMARK;
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new MissingIndexException();
+                }
+            }
+            case "delete" -> {
+                try {
+                    index = Integer.parseInt(words[1]);
+                    return DELETE;
+                } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+                    throw new MissingIndexException();
+                }
+            }
+            case "todo" -> {
+                if (message.length() < 5) {
+                    throw new MissingTaskException();
+                }
+                this.description = message.substring(5);
+                return TODO;
+            }
+            case "deadline" -> {
+                int i = find(words, "/by");
+                if (i == -1) {
+                    throw new MissingByException();
+                }
+                if (i == 1) {
+                    throw new MissingTaskException();
+                }
+                if (i == words.length - 1) {
+                    throw new MissingDeadlineException();
+                }
+                int j = message.indexOf("/by");
+                this.description = message.substring(9, j - 1);
+                this.by = message.substring(j + 4);
+                return DEADLINE;
+            }
+            case "event" -> {
+                int i = find(words, "/from");
+                int j = find(words, "/to");
+                if (i == -1 || j == -1) {
+                    throw new MissingFromOrToException();
+                }
+                if (i == 1) {
+                    throw new MissingTaskException();
+                }
+                if (i > j) {
+                    throw new FromToOrderException();
+                }
+                this.description = Arrays.stream(words, 1, i)
+                        .collect(Collectors.joining(" "));
+                this.from = Arrays.stream(words, i + 1, j)
+                        .collect(Collectors.joining(" "));
+                this.to = Arrays.stream(words, j + 1, words.length)
+                        .collect(Collectors.joining(" "));
+                return EVENT;
+            }
+            default -> {
+                return INVALID;
             }
         }
-
-        if (words[0].equals("unmark")) {
-            try {
-                index = Integer.parseInt(words[1]);
-                return UNMARK;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new MissingIndexException();
-            }
-        }
-
-        if (words[0].equals("delete")) {
-            try {
-                index = Integer.parseInt(words[1]);
-                return DELETE;
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new MissingIndexException();
-            }
-        }
-
-        if (words[0].equals("todo")) {
-            if (message.length() < 5) {
-                throw new MissingTaskException();
-            }
-            this.description = message.substring(5);
-            return TODO;
-        }
-
-        if (words[0].equals("deadline")) {
-            int i = find(words, "/by");
-            if (i == -1) {
-                throw new MissingByException();
-            }
-            if (i == 1) {
-                throw new MissingTaskException();
-            }
-            if (i == words.length - 1) {
-                throw new MissingDeadlineException();
-            }
-            int j = message.indexOf("/by");
-            this.description = message.substring(9, j - 1);
-            this.by = message.substring(j + 4);
-            return DEADLINE;
-        }
-
-        if (words[0].equals("event")) {
-            int i = find(words, "/from");
-            int j = find(words, "/to");
-            if (i == -1 || j == -1) {
-                throw new MissingFromOrToException();
-            }
-            if (i == 1) {
-                throw new MissingTaskException();
-            }
-            if (i > j) {
-                throw new FromToOrderException();
-            }
-            this.description = Arrays.stream(words, 1, i)
-                    .collect(Collectors.joining(" "));
-            this.from = Arrays.stream(words, i + 1, j)
-                    .collect(Collectors.joining(" "));
-            this.to = Arrays.stream(words, j + 1, words.length)
-                    .collect(Collectors.joining(" "));
-            return EVENT;
-        }
-
-        return INVALID;
 
     }
 
