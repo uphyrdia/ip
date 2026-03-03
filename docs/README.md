@@ -7,7 +7,6 @@ Phrolova is a lightweight Command Line Interface (CLI) task management chatbot. 
 
 If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks quickly without navigating graphical menus.
 
----
 ## Quick Start
 1. Ensure you have **Java 17 or above** installed on your computer.
 
@@ -33,7 +32,8 @@ If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks qui
 - `INDEX` refers to the number shown in the `list` command output.
 
 - Commands are case-sensitive.
----
+
+
 ## Features
 ### Listing All Tasks
 
@@ -45,7 +45,7 @@ list
 
 Example:
 
----
+
 ### Adding a Task without any Date
 
 Format :
@@ -55,7 +55,7 @@ todo DESCRIPTION
 
 Example:
 
----
+
 ### Adding a Task with a Deadline
 
 Format :
@@ -66,8 +66,8 @@ deadline DESCRIPTION /by DUE_DATE
 
 Example:
 
----
-### Adding a Task with Start & End Dates\
+
+### Adding a Task with Start & End Dates
 
 Format :
 `
@@ -76,7 +76,7 @@ event DESCRIPTION /from START_DATE /to END_DATE
 
 Example :
 
----
+
 ### Marking a Task as Done
 
 Format :
@@ -86,7 +86,7 @@ mark INDEX
 
 Example :
 
----
+
 ### Unmarking a Task
 
 Format :
@@ -96,7 +96,7 @@ unmark INDEX
 
 Example :
 
----
+
 
 ### Deleting a Task
 
@@ -107,7 +107,7 @@ delete INDEX
 
 Example :
 
----
+
 
 ### Finding Tasks
 
@@ -120,7 +120,7 @@ find KEYWORD
 
 Example :
 
----
+
 
 ### Exiting the Program
 
@@ -131,7 +131,7 @@ bye
 
 Example :
 
----
+
 
 ### Saving Data
 
@@ -149,7 +149,7 @@ Advanced users may edit the file manually.
 - If the file format becomes invalid, the application may fail to load tasks.
 - Always create a backup before manual edits.
 
----
+
 
 ## FAQ
 
