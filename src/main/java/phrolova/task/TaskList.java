@@ -89,6 +89,7 @@ public class TaskList {
 
     /**
      * Prints all tasks whose description contains the given keyword.
+     * If no such task exists, then nothing will be printed, as if no response.
      *
      * <p>Matching is currently case-sensitive and based on substring containment.
      *

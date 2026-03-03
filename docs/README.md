@@ -10,14 +10,14 @@ If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks qui
 ## Quick Start
 1. Ensure you have **Java 17 or above** installed on your computer.
 
-2. Download the latest `phrolova.jar` file.
+2. Download the latest `Phrolova.jar` file.
 
 3. Copy the `.jar` file into a folder you want to use as the home directory.
 
 4. Open a terminal and navigate (`cd`) into that folder.
 
 5. Run the application:
-`java -jar phrolova.jar`
+`java -jar Phrolova.jar`
 6. You should see a greeting message from Phrolova.
 
 7. Type commands in formats described below and press `Enter` to execute them.
@@ -36,7 +36,6 @@ If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks qui
 
 ## Features
 ### Listing All Tasks
-
 Format :
 `
 list
@@ -45,6 +44,7 @@ list
 
 Example:
 
+![](/docs/images/list_example.png)
 
 ### Adding a Task without any Date
 
@@ -55,6 +55,7 @@ todo DESCRIPTION
 
 Example:
 
+![](/docs/images/todo_example.png)
 
 ### Adding a Task with a Deadline
 
@@ -63,9 +64,9 @@ Format :
 deadline DESCRIPTION /by DUE_DATE
 `
 
-
 Example:
 
+![](/docs/images/deadline_example.png)
 
 ### Adding a Task with Start & End Dates
 
@@ -76,6 +77,7 @@ event DESCRIPTION /from START_DATE /to END_DATE
 
 Example :
 
+![](/docs/images/event_example.png)
 
 ### Marking a Task as Done
 
@@ -86,6 +88,7 @@ mark INDEX
 
 Example :
 
+![](/docs/images/mark_example.png)
 
 ### Unmarking a Task
 
@@ -96,7 +99,7 @@ unmark INDEX
 
 Example :
 
-
+![](/docs/images/unmark_example.png)
 
 ### Deleting a Task
 
@@ -107,11 +110,12 @@ delete INDEX
 
 Example :
 
-
+![](/docs/images/delete_example.png)
 
 ### Finding Tasks
 
-Finds all tasks whose description contains the string `KEYWORD`
+Finds all tasks whose description contains a `KEYWORD` string. 
+If no such task exists, then nothing will be printed, as if no response.
 
 Format :
 `
@@ -120,7 +124,7 @@ find KEYWORD
 
 Example :
 
-
+![](/docs/images/find_example.png)
 
 ### Exiting the Program
 
@@ -131,13 +135,15 @@ bye
 
 Example :
 
+![](/docs/images/exit_example.png)
 
-
-### Saving Data
+### Saving & Loading Data
 
 Phrolova automatically saves tasks to disk after any command that modifies the task list.
 
 There is **no** need to manually save.
+
+When application starts, saved task data are automatically loaded into an in-memory task list.
 
 ### Editing the Data File
 
