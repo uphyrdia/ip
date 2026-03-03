@@ -79,9 +79,6 @@ public class Storage {
      *
      * @param line a single line from the save file
      * @return reconstructed {@link Task}
-     *
-     * @throws IllegalArgumentException if the task type is invalid
-     * @throws ArrayIndexOutOfBoundsException if required fields are missing
      */
     public Task parseTask(String line) {
         String[] parts = line.split("\\|");
@@ -107,7 +104,7 @@ public class Storage {
     /**
      * Loads tasks from the save file into the in-memory task list.
      *
-     * <p>If the save file does not exist, an {@link IOException} is thrown.</p>
+     * <p>If the save file does not exist, then an empty txt file is to be created.</p>
      *
      * <p>Malformed or corrupted lines are skipped. A warning message
      * is printed to standard output, and loading continues.</p>
@@ -116,7 +113,8 @@ public class Storage {
      */
     public void load() throws IOException {
         if (!Files.exists(savePath)) {
-            throw new IOException();
+            Files.createDirectories(savePath.getParent());
+            Files.createFile(savePath);
         }
         List<String> lines = Files.readAllLines(savePath);
         for (String line : lines) {

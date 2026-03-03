@@ -31,12 +31,8 @@ public class TaskList {
      * <p>If the backing data file does not exist, a message is printed
      * and execution continues with an empty task list.
      */
-    public void load() {
-        try {
-            storage.load();
-        } catch (IOException e) {
-            ui.print("Data file does not exist, creating one.");
-        }
+    public void load() throws IOException {
+        storage.load();
     }
 
     /**
@@ -80,11 +76,11 @@ public class TaskList {
         try {
             ui.print("Removed: " + tasks.get(i - 1).toString());
             tasks.remove(i - 1);
+            ui.print("You have " + tasks.size() + " remaining task(s).");
+            save();
         } catch (IndexOutOfBoundsException e) {
             ui.print("Index out of bounds.");
         }
-        ui.print("You have " + tasks.size() + " remaining task(s).");
-        save();
     }
 
     /**
