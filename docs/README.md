@@ -145,6 +145,9 @@ There is **no** need to manually save.
 
 When application starts, saved task data are automatically loaded into an in-memory task list.
 
+If the path to the data file does not exist, it will be created at the start of the application, 
+with empty content.
+
 ### Editing the Data File
 
 Tasks are stored locally in `/data/Phrolova.txt`
