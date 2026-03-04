@@ -1,7 +1,7 @@
 # Phrolova User Guide
 
 
-![](/docs/images/product_screenshot.png)
+![](images/product_screenshot.png)
 
 Phrolova is a lightweight Command Line Interface (CLI) task management chatbot. It helps you manage todos, deadlines, and events efficiently using typed commands.
 
@@ -42,7 +42,7 @@ Format :
 
 Example:
 
-![](/docs/images/list_example.png)
+![](images/list_example.png)
 
 ### Adding a Task without any Date
 
@@ -51,7 +51,7 @@ Format :
 
 Example:
 
-![](/docs/images/todo_example.png)
+![](images/todo_example.png)
 
 ### Adding a Task with a Deadline
 
@@ -60,7 +60,7 @@ Format :
 
 Example:
 
-![](/docs/images/deadline_example.png)
+![](images/deadline_example.png)
 
 ### Adding a Task with Start & End Dates
 
@@ -69,7 +69,7 @@ Format :
 
 Example :
 
-![](/docs/images/event_example.png)
+![](images/event_example.png)
 
 ### Marking a Task as Done
 
@@ -78,7 +78,7 @@ Format :
 
 Example :
 
-![](/docs/images/mark_example.png)
+![](images/mark_example.png)
 
 ### Unmarking a Task
 
@@ -87,7 +87,7 @@ Format :
 
 Example :
 
-![](/docs/images/unmark_example.png)
+![](images/unmark_example.png)
 
 ### Deleting a Task
 
@@ -96,7 +96,7 @@ Format :
 
 Example :
 
-![](/docs/images/delete_example.png)
+![](images/delete_example.png)
 
 ### Finding Tasks
 
@@ -108,7 +108,7 @@ Format :
 
 Example :
 
-![](/docs/images/find_example.png)
+![](images/find_example.png)
 
 ### Exiting the Program
 
@@ -117,7 +117,7 @@ Format :
 
 Example :
 
-![](/docs/images/exit_example.png)
+![](images/exit_example.png)
 
 ### Saving & Loading Data
 
