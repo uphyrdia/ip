@@ -32,7 +32,9 @@ If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks qui
 - `INDEX` refers to the number shown in the `list` command output.
 
 - Commands are case-sensitive.
-
+  
+- ⚠ **Caution:** Do not use "|" in any part of the command. 
+For example: `deadline a|b /by 14|00` should be avoided. 
 
 ## Features
 ### Listing All Tasks

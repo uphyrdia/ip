@@ -80,7 +80,7 @@ public class Storage {
      * @param line a single line from the save file
      * @return reconstructed {@link Task}
      */
-    public Task parseTask(String line) {
+    public Task parseTask(String line) throws IllegalArgumentException {
         String[] parts = line.split("\\|");
 
         String type = parts[0];
@@ -121,7 +121,7 @@ public class Storage {
             try {
                 tasks.add(parseTask(line));
             } catch (Exception e) {
-                System.out.println("Warning: Skipping corrupted line -> " + line);
+                System.out.println("\t" + "Warning: Skipping corrupted line -> " + line + " while loading tasks.");
             }
         }
     }
