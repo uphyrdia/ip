@@ -37,9 +37,7 @@ If you prefer keyboard-driven workflows, Phrolova lets you manage your tasks qui
 ## Features
 ### Listing All Tasks
 Format :
-`
-list
-`
+`list`
 
 
 Example:
@@ -49,9 +47,7 @@ Example:
 ### Adding a Task without any Date
 
 Format :
-`
-todo DESCRIPTION
-`
+`todo DESCRIPTION`
 
 Example:
 
@@ -60,9 +56,7 @@ Example:
 ### Adding a Task with a Deadline
 
 Format :
-`
-deadline DESCRIPTION /by DUE_DATE
-`
+`deadline DESCRIPTION /by DUE_DATE`
 
 Example:
 
@@ -71,9 +65,7 @@ Example:
 ### Adding a Task with Start & End Dates
 
 Format :
-`
-event DESCRIPTION /from START_DATE /to END_DATE
-`
+`event DESCRIPTION /from START_DATE /to END_DATE`
 
 Example :
 
@@ -82,9 +74,7 @@ Example :
 ### Marking a Task as Done
 
 Format :
-`
-mark INDEX
-`
+`mark INDEX`
 
 Example :
 
@@ -93,9 +83,7 @@ Example :
 ### Unmarking a Task
 
 Format :
-`
-unmark INDEX
-`
+`unmark INDEX`
 
 Example :
 
@@ -104,9 +92,7 @@ Example :
 ### Deleting a Task
 
 Format :
-`
-delete INDEX
-`
+`delete INDEX`
 
 Example :
 
@@ -118,9 +104,7 @@ Finds all tasks whose description contains a `KEYWORD` string.
 If no such task exists, then nothing will be printed, as if no response.
 
 Format :
-`
-find KEYWORD
-`
+`find KEYWORD`
 
 Example :
 
@@ -129,9 +113,7 @@ Example :
 ### Exiting the Program
 
 Format :
-`
-bye
-`
+`bye`
 
 Example :
 
