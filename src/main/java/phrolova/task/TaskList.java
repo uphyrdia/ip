@@ -93,8 +93,8 @@ public class TaskList {
      */
     public void find(String keyword) {
         tasks.stream()
-                .filter(t -> t.getDescription().contains(keyword))
-                .forEach(t -> ui.print(t.toString()));
+             .filter(t -> t.getDescription().contains(keyword))
+             .forEach(t -> ui.print(t.toString()));
     }
 
     /**
