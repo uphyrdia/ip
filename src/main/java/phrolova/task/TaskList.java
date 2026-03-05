@@ -73,7 +73,7 @@ public class TaskList {
      * <p>If the index is invalid, an error message is printed.
      * After deletion, the updated task count is displayed.
      *
-     * @param i 1-based index of the task to remove
+     * @param i 1-based (starting from 1 instead of 0) index of the task to remove
      * @throws IOException if saving to storage fails
      */
     public void delete(int i) throws IOException {
